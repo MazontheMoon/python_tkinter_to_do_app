@@ -20,8 +20,7 @@ def fGuide():
         guideText = """How to use the To Do application.
 Enter the task and press the Add Task button to add it to the list.
 When a task has been completed, select the item in the list and mark it as complete by pressing the Complete button.
-To delete a saved task, select the item in the list nd delete it by pressing the Delete button."""
-
+To delete a saved task, select the item in the list and delete it by pressing the Delete button."""
         messagebox.showinfo("To-Do: A User Guide", guideText)
 
 # Exit application
@@ -38,7 +37,7 @@ def fExit():
 window = tk.Tk()
 
 # Set window properties
-window.title("My To-Do List")
+window.title("To-Do List")
 window.geometry('640x600+50+50') 
 window.config(bg="DarkSlateBlue")
 window.resizable(False, False)
@@ -46,11 +45,11 @@ window.resizable(False, False)
 # Define title widget
 titleFrame = Frame(window)
 titleLabel = Label(titleFrame, 
-		 text="My To-Do List",
+		 text="To-Do List",
                  fg="black",
                  bg="DarkSlateBlue",
 		 font = "Garamond 32 bold italic",
-                 pady=10,
+                 pady=20,
                  padx=10)
 titleLabel.pack(fill="x")
 
@@ -72,7 +71,9 @@ taskName.grid(row=0, column=1, sticky="ew")
 taskFrame.columnconfigure(1, weight=1)
 
 # Define list widget
-taskListFrame = Frame(window)
+taskListFrame = Frame(window,
+                      height=280,
+                      bg="DarkSlateBlue")
 taskListLabel = Label(taskListFrame,
                  text="Current Tasks: ",
                       font = "Tahoma 12 bold",
@@ -80,6 +81,7 @@ taskListLabel = Label(taskListFrame,
                       anchor="w",
                       pady=10,
                       padx=10)
+taskListFrame.pack_propagate(False)
 taskListLabel.pack(fill="x")
 
 
@@ -92,7 +94,7 @@ completeLabel = Label(overviewFrame,
                       anchor="w",
                       pady=10,
                       padx=10)
-completeLabel.pack(fill="x", expand = True)
+completeLabel.pack(fill="x")
 
 
 outstandingLabel = Label(overviewFrame,
@@ -102,22 +104,22 @@ outstandingLabel = Label(overviewFrame,
                       anchor="w",
                       pady=10,
                       padx=10)
-outstandingLabel.pack(fill="x", expand = True)
+outstandingLabel.pack(fill="x")
 
 
 # Place frames on screen
 
 titleFrame.pack()
-taskFrame.pack(fill="x", expand = True, padx=20)
-taskListFrame.pack(fill="x", expand = True, padx=20)
-overviewFrame.pack(fill="x", expand = True, padx=20)
+taskFrame.pack(fill="x", padx=20)
+taskListFrame.pack(fill="x", padx=20, pady=20)
+overviewFrame.pack(fill="x", padx=20)
 
 
 # User guide button
-btnGuide = Button(window, text="User Guide", padx=10, command=fGuide).place(x=25, y=70)
+btnGuide = Button(window, text="User Guide", padx=10, command=fGuide).place(x=22, y=55)
 
 # Add button
-btnAdd = Button(window, text="Add Task" , padx=10).place(x=540, y=180)
+btnAdd = Button(window, text="Add Task" , padx=10).place(x=540, y=150)
 
 # Delete button
 btnDelete = Button(window, text="Delete Task", padx=10).place(x=25, y=560)
