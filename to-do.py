@@ -68,7 +68,7 @@ taskListLabel = Label(taskListFrame,
                       font = "Tahoma 12 bold",
                       bg="DarkSlateBlue",
                       anchor="w",
-                      pady=20,
+                      pady=10,
                       padx=10)
 taskListLabel.pack(fill="x")
 
@@ -80,7 +80,7 @@ completeLabel = Label(overviewFrame,
                       font = "Tahoma 12 bold",
                       bg="DarkSlateBlue",
                       anchor="w",
-                      pady=20,
+                      pady=10,
                       padx=10)
 completeLabel.pack(fill="x", expand = True)
 
@@ -90,7 +90,7 @@ outstandingLabel = Label(overviewFrame,
                       font = "Tahoma 12 bold",
                       bg="DarkSlateBlue",
                       anchor="w",
-                      pady=20,
+                      pady=10,
                       padx=10)
 outstandingLabel.pack(fill="x", expand = True)
 
@@ -104,15 +104,22 @@ overviewFrame.pack(fill="x", expand = True, padx=20)
 
 
 # User guide button
-btnGuide = Button(window, text="User Guide", command=fGuide).place(x = 25, y = 70)
+btnGuide = Button(window, text="User Guide", padx=10, command=fGuide).place(x=25, y=70)
 
 # Add button
-btnAdd = Button(window, text="Add").place(x=100, y = 550)
+btnAdd = Button(window, text="Add Task" , padx=10).place(x=540, y=180)
+
+# Delete button
+btnDelete = Button(window, text="Delete Task", padx=10).place(x=25, y=560)
+
+# Complete button
+btnComplete = Button(window, text="Complete Task", padx=10).place(x=125, y=560)
+
+# Outstanding button
+btnOutstanding = Button(window, text="Outstanding Tasks", padx=10).place(x=245, y=560)
 
 # Exit button
-btnExit = Button(window, text="Exit", command=fExit).place(x=550, y = 550)
+btnExit = Button(window, text="Exit", padx=10, command=fExit).place(x=570, y=560)
 
 # display window
 window.mainloop()
-
-
