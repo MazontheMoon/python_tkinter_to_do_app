@@ -1,5 +1,10 @@
-''' SD-GAL-05 SD-TA-009 Exercise 001 Author: Mary Ronan Last Modified:
-30/03/2026 A To Do Application in Python built using Tkinter '''
+'''
+SD-GAL-05 SD-TA-009 Exercise 001
+Author: Mary Ronan
+Last Modified:
+30/03/2026
+A To Do Application in Python built using Tkinter
+'''
 
 # Required imports
 import tkinter as tk
@@ -12,7 +17,12 @@ from tkinter import messagebox
 
 # Display user guide
 def fGuide():
-	messagebox.showinfo("To-Do: A User Guide", "Enter your task and press the Add button to Add it to the list. Select an item in the list to mark it as complete by pressing the Complete button, or delete the task by pressing the Delete button.""")
+        guideText = """How to use the To Do application.
+Enter the task and press the Add Task button to add it to the list.
+When a task has been completed, select the item in the list and mark it as complete by pressing the Complete button.
+To delete a saved task, select the item in the list nd delete it by pressing the Delete button."""
+
+        messagebox.showinfo("To-Do: A User Guide", guideText)
 
 # Exit application
 def fExit():
