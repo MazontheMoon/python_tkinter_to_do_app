@@ -23,6 +23,20 @@ When a task has been completed, select the item in the list and mark it as compl
 To delete a saved task, select the item in the list and delete it by pressing the Delete button."""
         messagebox.showinfo("To-Do: A User Guide", guideText)
 
+# Add Task
+def fAdd():
+
+        # Get task input
+        newTask = taskEntry.get()
+        taskEntry.delete(0, END)
+
+        # Check for valid task
+        if newTask != "":
+                taskList.insert(END, newTask)
+        else:
+                messagebox.showerror("Error", "Enter a Task")
+                taskEntry.focus()
+
 # Exit application
 def fExit():
 	answer = messagebox.askquestion("Exit Application", "Are you sure you want to exit this application?")
@@ -65,15 +79,9 @@ nameLabel = Label(taskFrame,
                   font = "Tahoma 10",
                   pady=10)
 nameLabel.grid(row=0, column=0)
-taskName = Entry(taskFrame)
-taskName.grid(row=0, column=1, sticky="ew")
+taskEntry = Entry(taskFrame)
+taskEntry.grid(row=0, column=1, sticky="ew")
 taskFrame.columnconfigure(1, weight=1)
-
-# Define task header widget
-currentFrame = Frame(window,
-                      bg="DarkSlateBlue",
-                     bd=2)
-
 
 # Define list frame
 taskListFrame = Frame(window,
@@ -101,7 +109,7 @@ taskList = Listbox(taskListFrame,
 taskListFrame.pack_propagate(False)
 taskList.pack(side=LEFT, fill=BOTH, padx=2)
 
-#taskList.pack(fill="x")
+# taskList.pack(fill="x")
 
 
 # Define overview frame 
@@ -133,7 +141,7 @@ overviewFrame.pack(fill="x", padx=20, pady=10)
 
 # Buttons - static placement
 btnGuide = Button(window, text="User Guide", padx=10, command=fGuide).place(x=22, y=55)
-btnAdd = Button(window, text="Add Task" , padx=10).place(x=540, y=145)
+btnAdd = Button(window, text="Add Task" , padx=10, command=fAdd).place(x=540, y=145)
 btnDelete = Button(window, text="Delete Task", padx=10).place(x=25, y=560)
 btnComplete = Button(window, text="Complete Task", padx=10).place(x=125, y=560)
 btnOutstanding = Button(window, text="Outstanding Tasks", padx=10).place(x=245, y=560)
