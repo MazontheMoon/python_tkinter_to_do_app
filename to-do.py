@@ -23,7 +23,7 @@ When a task has been completed, select the item in the list and mark it as compl
 To delete a saved task, select the item in the list and delete it by pressing the Delete button."""
         messagebox.showinfo("To-Do: A User Guide", guideText)
 
-# Add Task
+# Add task
 def fAdd():
 
         # Get task input
@@ -36,6 +36,19 @@ def fAdd():
         else:
                 messagebox.showerror("Error", "Enter a Task")
                 taskEntry.focus()
+
+# Delete task
+def fDel():
+
+        # Get selected item(s)
+        deleteTasks = taskList.curselection()
+
+        # Delete task(s)
+        if len(deleteTasks) != 0:
+                for task in deleteTasks[::-1]:
+                        taskList.delete(task)
+        else:
+                messagebox.showerror("Error", "No Tasks Selected.")
 
 # Exit application
 def fExit():
@@ -81,6 +94,7 @@ nameLabel = Label(taskFrame,
 nameLabel.grid(row = 0, column = 0)
 taskEntry = Entry(taskFrame)
 taskEntry.grid(row = 0, column = 1, sticky = "ew")
+taskEntry.focus()
 taskFrame.columnconfigure(1, weight = 1)
 
 # Define task header widget
@@ -95,8 +109,6 @@ currentLabel.pack(fill="x")
 
 # Define task list widget
 taskListFrame = Frame(window,
-                      #height = 300,
-                      #width = 500,
                       bd = 2,
                       bg = "DarkSlateBlue")
 #taskListFrame.pack_propagate(False)
@@ -108,9 +120,12 @@ taskList = Listbox(taskListFrame,
                    height = 17,
                    width = 81,
                    cursor = "hand2",
+                   selectbackground = "lightblue",
                    highlightbackground = "black",
                    highlightthickness = 2)
-taskList.pack(side=LEFT, fill = "both", padx = 2)
+taskList.pack(side=LEFT,
+              fill = "both",
+              padx = 2)
 
 # Add scrollbar to listbox
 scrollbar = Scrollbar(taskListFrame)
@@ -161,7 +176,8 @@ btnAdd = Button(window,
 
 btnDelete = Button(window,
                    text = "Delete Task",
-                   padx = 10).place(x = 25, y = 560)
+                   padx = 10,
+                   command = fDel).place(x = 25, y = 560)
 
 btnComplete = Button(window,
                      text = "Complete Task",
