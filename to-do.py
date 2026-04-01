@@ -33,10 +33,10 @@ def fAdd(event = None):
         # Check for valid task
         if newTask != "":
                 taskList.insert(END, newTask)
-                taskList.itemconfig("end", background="green", foreground="black")
+                taskList.itemconfig("end", background="gold", foreground="black")
         else:
                 messagebox.showerror("Error", "Enter a Task")
-                taskEntry.focus()
+        taskEntry.focus()
 
 # Delete task
 def fDel():
@@ -52,6 +52,7 @@ def fDel():
                                 taskList.delete(task)
         else:
                 messagebox.showerror("Error", "No Tasks Selected.")
+        taskEntry.focus()
 
 # Complete task
 def fComplete():
@@ -59,27 +60,17 @@ def fComplete():
         completeTasks = taskList.curselection()
 
         # Complete task(s)
-        if len(completeTasks) != 0:
+        if len(completeTasks) == 0:
+                messagebox.showerror("Error", "No Tasks Selected.")
+        else:
                 for task in completeTasks[::-1]:
-                        bground = taskList.itemcget(completeTasks, "background")
-                        if bground == "green":
-                                taskList.itemconfig(completeTasks, {'selectbackground' : 'grey','selectforeground':'black'})
+                        bgColor = taskList.itemcget(task, "background")
+                        if bgColor == "gold":
+                                taskList.itemconfig(task, background="green", foreground="black")
                         else:
-                                taskList.itemconfig(completeTasks, {'selectbackground' : 'green','selectforeground':'black'})
-        else:
-                messagebox.showerror("Error", "No Tasks Selected.")
-
-# Pending task
-def fPending():
-        # Get selected item(s)
-        pendingTasks = taskList.curselection()
-
-        # Complete task(s)
-        if len(pendingTasks) != 0:
-                for task in pendingTasks[::-1]:
-                        taskList.itemconfig(pendingTasks, {'selectbackground' : 'gold','selectforeground':'grey'})
-        else:
-                messagebox.showerror("Error", "No Tasks Selected.")
+                                taskList.itemconfig(task, background="gold", foreground="black")
+        taskList.selection_clear(0, "end")
+        taskEntry.focus()
 
 # Exit application
 def fExit():
@@ -139,13 +130,11 @@ currentLabel = Label(currentFrame,
                      pady = 10)
 currentLabel.pack(fill="x")
 
-# Define task list widget
+# Define task listbox widget
 taskListFrame = Frame(window,
                       bd = 2,
                       bg = "DarkSlateBlue")
 
-
-# Define task listbox widget
 taskList = Listbox(taskListFrame,
                    selectmode = "multiple",
                    font = "Tahoma 10",
@@ -218,9 +207,9 @@ btnComplete = Button(window,
                      padx = 10,
                      command = fComplete).place(x = 125, y = 560)
 
-btnOutstanding = Button(window,
-                        text = "Save Tasks",
-                        padx = 10).place(x = 330, y = 560)
+btnSave= Button(window,
+                text = "Save Tasks",
+                padx = 10).place(x = 330, y = 560)
 
 btnExit = Button(window,
                  text = "Exit",
