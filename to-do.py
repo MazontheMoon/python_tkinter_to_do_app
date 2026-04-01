@@ -33,6 +33,7 @@ def fAdd(event = None):
         # Check for valid task
         if newTask != "":
                 taskList.insert(END, newTask)
+                taskList.itemconfig("end", background="green", foreground="black")
         else:
                 messagebox.showerror("Error", "Enter a Task")
                 taskEntry.focus()
@@ -60,7 +61,23 @@ def fComplete():
         # Complete task(s)
         if len(completeTasks) != 0:
                 for task in completeTasks[::-1]:
-                        taskList.itemconfig(completeTasks, {'selectbackground' : 'green','selectforeground':'black'})
+                        bground = taskList.itemcget(completeTasks, "background")
+                        if bground == "green":
+                                taskList.itemconfig(completeTasks, {'selectbackground' : 'grey','selectforeground':'black'})
+                        else:
+                                taskList.itemconfig(completeTasks, {'selectbackground' : 'green','selectforeground':'black'})
+        else:
+                messagebox.showerror("Error", "No Tasks Selected.")
+
+# Pending task
+def fPending():
+        # Get selected item(s)
+        pendingTasks = taskList.curselection()
+
+        # Complete task(s)
+        if len(pendingTasks) != 0:
+                for task in pendingTasks[::-1]:
+                        taskList.itemconfig(pendingTasks, {'selectbackground' : 'gold','selectforeground':'grey'})
         else:
                 messagebox.showerror("Error", "No Tasks Selected.")
 
@@ -132,16 +149,17 @@ taskListFrame = Frame(window,
 taskList = Listbox(taskListFrame,
                    selectmode = "multiple",
                    font = "Tahoma 10",
-                   bg = "lightgrey",
+                   bg = "white",
                    height = 17,
                    width = 81,
                    cursor = "hand2",
-                   selectbackground = "purple",
+                   selectbackground = "indigo",
                    highlightbackground = "black",
                    highlightthickness = 2)
 taskList.pack(side=LEFT,
               fill = "both",
-              padx = 2)
+              padx = 2,
+              pady = 2)
 
 # Add scrollbar to listbox
 scrollbar = Scrollbar(taskListFrame)
@@ -196,13 +214,13 @@ btnDelete = Button(window,
                    command = fDel).place(x = 25, y = 560)
 
 btnComplete = Button(window,
-                     text = "Complete Task",
+                     text = "Set Task Complete/Incomplete",
                      padx = 10,
                      command = fComplete).place(x = 125, y = 560)
 
 btnOutstanding = Button(window,
-                        text = "Pending Task",
-                        padx = 10).place(x = 245, y = 560)
+                        text = "Save Tasks",
+                        padx = 10).place(x = 330, y = 560)
 
 btnExit = Button(window,
                  text = "Exit",
