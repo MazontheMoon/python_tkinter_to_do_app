@@ -45,8 +45,22 @@ def fDel():
 
         # Delete task(s)
         if len(deleteTasks) != 0:
-                for task in deleteTasks[::-1]:
-                        taskList.delete(task)
+                confirmDel = messagebox.askquestion("Delete Task", "Are you sure you want to delete the task(s)?")
+                if confirmDel == 'yes':
+                        for task in deleteTasks[::-1]:
+                                taskList.delete(task)
+        else:
+                messagebox.showerror("Error", "No Tasks Selected.")
+
+# Complete task
+def fComplete():
+        # Get selected item(s)
+        completeTasks = taskList.curselection()
+
+        # Complete task(s)
+        if len(completeTasks) != 0:
+                for task in completeTasks[::-1]:
+                        taskList.itemconfig(completeTasks, {'selectbackground' : 'green','selectforeground':'black'})
         else:
                 messagebox.showerror("Error", "No Tasks Selected.")
 
@@ -115,6 +129,7 @@ taskListFrame = Frame(window,
 
 # Define task listbox widget
 taskList = Listbox(taskListFrame,
+                   selectmode = "multiple",
                    font = "Tahoma 10",
                    bg = "lightgrey",
                    height = 17,
@@ -181,7 +196,8 @@ btnDelete = Button(window,
 
 btnComplete = Button(window,
                      text = "Complete Task",
-                     padx = 10).place(x = 125, y = 560)
+                     padx = 10,
+                     command = fComplete).place(x = 125, y = 560)
 
 btnOutstanding = Button(window,
                         text = "Outstanding Tasks",
