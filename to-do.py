@@ -24,7 +24,7 @@ To delete a saved task, select the item in the list and delete it by pressing th
         messagebox.showinfo("To-Do: A User Guide", guideText)
 
 # Add task
-def fAdd():
+def fAdd(event = None):
 
         # Get task input
         newTask = taskEntry.get()
@@ -109,6 +109,7 @@ nameLabel.grid(row = 0, column = 0)
 taskEntry = Entry(taskFrame)
 taskEntry.grid(row = 0, column = 1, sticky = "ew")
 taskEntry.focus()
+taskEntry.bind("<Return>", fAdd)
 taskFrame.columnconfigure(1, weight = 1)
 
 # Define task header widget
@@ -125,7 +126,7 @@ currentLabel.pack(fill="x")
 taskListFrame = Frame(window,
                       bd = 2,
                       bg = "DarkSlateBlue")
-#taskListFrame.pack_propagate(False)
+
 
 # Define task listbox widget
 taskList = Listbox(taskListFrame,
@@ -135,7 +136,7 @@ taskList = Listbox(taskListFrame,
                    height = 17,
                    width = 81,
                    cursor = "hand2",
-                   selectbackground = "lightblue",
+                   selectbackground = "purple",
                    highlightbackground = "black",
                    highlightthickness = 2)
 taskList.pack(side=LEFT,
@@ -200,7 +201,7 @@ btnComplete = Button(window,
                      command = fComplete).place(x = 125, y = 560)
 
 btnOutstanding = Button(window,
-                        text = "Outstanding Tasks",
+                        text = "Pending Task",
                         padx = 10).place(x = 245, y = 560)
 
 btnExit = Button(window,
