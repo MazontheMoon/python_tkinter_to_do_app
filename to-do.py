@@ -72,6 +72,10 @@ def fComplete():
         taskList.selection_clear(0, "end")
         taskEntry.focus()
 
+# Export task
+def fSave():
+        pass
+
 # Exit application
 def fExit():
 	answer = messagebox.askquestion("Exit Application", "Are you sure you want to exit this application?")
@@ -87,7 +91,7 @@ window = tk.Tk()
 
 # Set window properties
 window.title("To-Do List")
-window.geometry('640x600+50+50') 
+window.geometry('640x660+50+50') 
 window.config(bg = "DarkSlateBlue")
 window.resizable(False, False)
 
@@ -137,7 +141,7 @@ taskListFrame = Frame(window,
 
 taskList = Listbox(taskListFrame,
                    selectmode = "multiple",
-                   font = "Tahoma 10",
+                   font = "Tahoma 12",
                    bg = "white",
                    height = 17,
                    width = 81,
@@ -200,21 +204,22 @@ btnAdd = Button(window,
 btnDelete = Button(window,
                    text = "Delete Task",
                    padx = 10,
-                   command = fDel).place(x = 25, y = 560)
+                   command = fDel).place(x = 25, y = 620)
 
 btnComplete = Button(window,
                      text = "Set Task Complete/Incomplete",
                      padx = 10,
-                     command = fComplete).place(x = 125, y = 560)
+                     command = fComplete).place(x = 125, y = 620)
 
 btnSave= Button(window,
                 text = "Save Tasks",
-                padx = 10).place(x = 330, y = 560)
+                padx = 10,
+                command = fSave).place(x = 330, y = 620)
 
 btnExit = Button(window,
                  text = "Exit",
                  padx = 10,
-                 command = fExit).place(x = 570, y = 560)
+                 command = fExit).place(x = 570, y = 620)
 
 # Display application window
 window.mainloop()
