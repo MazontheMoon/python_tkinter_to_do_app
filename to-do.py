@@ -23,7 +23,7 @@ filename = "./tasks.csv"
 def fReadFile():
         try:
                 # Access csv file
-                with open(filename) as taskFile:
+                with open(filename, encoding="utf-8") as taskFile:
                         reader = csv.reader(taskFile)
                         data = list(reader)
 
@@ -32,7 +32,7 @@ def fReadFile():
                                 for task in list(range(0, len(data))):
                                         taskList.insert(task, data[task][0])
                                         if data[task][1] == "c":
-                                                taskList.itemconfig(task, background="green", foreground="black")
+                                                taskList.itemconfig(task, background="seagreen", foreground="black")
                                         else:
                                                 taskList.itemconfig(task, background="gold", foreground="black")
         except:
