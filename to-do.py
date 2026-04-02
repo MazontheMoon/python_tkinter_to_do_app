@@ -63,9 +63,14 @@ def taskCounter():
 # Display user guide
 def fGuide():
         guideText = """How to use the To Do application.\n
-Enter the task and press the Add Task button to add it to the list.\n
-When a task has been completed, select the item in the list and mark it as complete by pressing the Complete button.\n
-To delete a saved task, select the item in the list and delete it by pressing the Delete button."""
+Enter the task and press the Add Task button or press the Enter key on your keyboard to add your task to the list.\n
+New Outstanding Tasks will be highlighted in Yellow.\n
+To mark a Task as Completed, or to change a Completed Task to an Outstanding Task select the task(s) in the list and press the Set Task Complete/Incomplete button.\n
+Completed Tasks will be highlighted in Green and display a ✔. \n
+To save the current list of tasks press the Save Tasks button.\n
+Note: Tasks will also be saved upon exit of the application when using the Exit button.\n
+To delete tasks, select the task(s) in the list and press the Delete Task button.\n
+This Application is brought to you by Future Interactive Technologies Ltd\n"""
         messagebox.showinfo("To-Do: A User Guide", guideText)
 
 # Add task
@@ -144,9 +149,9 @@ def fSave():
                                 else:
                                       complete = "o"
                                 taskFile.write(f"{taskList.get(task)},{complete}\n")
-                        messagebox.showinfo("Save Tasks", "Tasks have been succesfully saved")
+                        messagebox.showinfo("Save Tasks", "Tasks succesfully saved")
         except:
-                messagebox.showerror("File IO Error", "File " + filename + " failed to load.")
+                messagebox.showerror("File IO Error", "Unable to Save Tasks to File.")
                                 
 
 # Exit application
@@ -224,7 +229,7 @@ currentLabel = Label(currentFrame,
                      bg = "Ivory",
                      anchor = "w",
                      pady = 10)
-currentLabel.pack(fill="x")
+currentLabel.pack(fill = "x")
 
 # Define task listbox widget
 taskListFrame = Frame(window,
@@ -241,14 +246,15 @@ taskList = Listbox(taskListFrame,
                    selectbackground = "indigo",
                    highlightbackground = "black",
                    highlightthickness = 2)
-taskList.pack(side=LEFT,
+taskList.pack(side = LEFT,
               fill = "both",
+              expand = True,
               padx = 2,
               pady = 2)
 
 # Add scrollbar to listbox
 scrollbar = Scrollbar(taskListFrame)
-scrollbar.pack(side=RIGHT,
+scrollbar.pack(side = RIGHT,
                fill = "y",
                padx = 2)
 taskList.config(yscrollcommand = scrollbar.set)
@@ -257,9 +263,9 @@ scrollbar.config(command = taskList.yview)
 # Define overview frame 
 overviewFrame = Frame(window)
 
-# Define complete label widget
+# Define complete label widget in overview frame
 completeLabel = Label(overviewFrame,
-                 text="Tasks Completed: ",
+                 text = "Tasks Completed: ",
                       font = "Tahoma 12 bold",
                       fg = "black",
                       bg = "seagreen",
@@ -267,9 +273,9 @@ completeLabel = Label(overviewFrame,
                       pady = 5)
 completeLabel.pack(fill = "x")
 
-# Define outstanding label widget
+# Define outstanding label widget on overview frame
 outstandingLabel = Label(overviewFrame,
-                 text="Tasks Outstanding: ",
+                 text = "Tasks Outstanding: ",
                       font = "Tahoma 12 bold",
                       fg = "black",                        
                       bg = "gold",
@@ -284,8 +290,7 @@ currentFrame.pack(fill = "x", padx = 20)
 taskListFrame.pack(fill = "x", padx = 20)
 overviewFrame.pack(fill = "x", padx = 20, pady = 10)
 
-
-# Buttons - static placement
+# Add buttons to window - static placement
 btnAdd = Button(window,
                 text = "Add Task" ,
                 padx = 10,
