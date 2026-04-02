@@ -141,7 +141,7 @@ def fSave():
 
         # Export tasks to csv file
         try:
-                with open("./tasks.csv", "w") as taskFile:
+                with open("./tasks.csv", "w", encoding="utf-8") as taskFile:
                         for task in range(0, count):
                                 bground = taskList.itemcget(task, "background")
                                 if bground == "seagreen":
