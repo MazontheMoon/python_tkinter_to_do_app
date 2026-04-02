@@ -2,7 +2,7 @@
 SD-GAL-05 SD-TA-009 Exercise 001
 Author: Mary Ronan
 Last Modified:
-01/04/2026
+02/04/2026
 A To Do Application in Python built using Tkinter
 '''
 
@@ -10,6 +10,10 @@ A To Do Application in Python built using Tkinter
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
+import csv
+
+# Variables
+filename = "./tasks.csv"
 
 # ---------
 # FUNCTIONS
@@ -74,7 +78,24 @@ def fComplete():
 
 # Export task
 def fSave():
-        pass
+
+        # Get number of tasks
+        count = taskList.index("end")
+
+        # Export tasks to csv file
+        try:
+                with open("./tasks.csv", "w") as taskFile:
+                        for task in range(0, count):
+                                bground = taskList.itemcget(task, "background")
+                                if bground == "green":
+                                        complete = "c"
+                                else:
+                                      complete = "o"
+                                taskFile.write(f"{taskList.get(task)},{complete}\n")
+                        messagebox.showinfo("Save Tasks", "Taks have been succesfully saved")
+        except:
+                messagebox.showerror("File IO Error", "File " + filename + " failed to load.")
+                                
 
 # Exit application
 def fExit():
