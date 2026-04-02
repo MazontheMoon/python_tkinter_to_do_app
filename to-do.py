@@ -111,11 +111,19 @@ def fComplete():
                 messagebox.showerror("Error", "No Tasks Selected.")
         else:
                 for task in completeTasks[::-1]:
+                        currentTask = taskList.get(task)
                         bgColor = taskList.itemcget(task, "background")
                         if bgColor == "gold":
+                                completed_text = f"{currentTask} ✔"
+                                taskList.delete(task)
+                                taskList.insert(task, completed_text)
                                 taskList.itemconfig(task, background="seagreen", foreground="black")
                         else:
-                                taskList.itemconfig(task, background="gold", foreground="black")
+                                if currentTask.endswith(" ✔"):
+                                        task_text = currentTask[:-2].strip()
+                                        taskList.delete(task)
+                                        taskList.insert(task, task_text)
+                                        taskList.itemconfig(task, background="gold", foreground="black")
         taskList.selection_clear(0, "end")
         taskCounter()
         taskEntry.focus()
@@ -136,7 +144,7 @@ def fSave():
                                 else:
                                       complete = "o"
                                 taskFile.write(f"{taskList.get(task)},{complete}\n")
-                        messagebox.showinfo("Save Tasks", "Taks have been succesfully saved")
+                        messagebox.showinfo("Save Tasks", "Tasks have been succesfully saved")
         except:
                 messagebox.showerror("File IO Error", "File " + filename + " failed to load.")
                                 
