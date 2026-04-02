@@ -158,19 +158,24 @@ window = tk.Tk()
 # Set window properties
 window.title("To-Do List")
 window.geometry('640x660+50+50') 
-window.config(bg = "DarkSlateBlue")
+window.config(bg = "Ivory")
 window.resizable(False, False)
 
-# Define title frame and label
+# Define title frame
 titleFrame = Frame(window)
 titleLabel = Label(titleFrame, 
                  text = "To-Do List",
                  fg = "black",
-                 bg = "DarkSlateBlue",
+                 bg = "Ivory",
                  font = "Garamond 32 bold italic",                  
                  pady = 20,
                  padx = 10)
 titleLabel.pack(fill = "x")
+
+# Add image
+#logo = PhotoImage(file="./todo_icon.png")
+#logoLabel = Label(titleFrame,
+#                  image = logo).place(x = 5, y = 5)
 
 # Define task frame
 taskFrame = Frame(window, 
@@ -195,7 +200,7 @@ currentFrame = Frame(window)
 currentLabel = Label(currentFrame,
                      text = "Current Tasks: ",
                      font = "Tahoma 12 bold",
-                     bg = "DarkSlateBlue",
+                     bg = "Ivory",
                      anchor = "w",
                      pady = 10)
 currentLabel.pack(fill="x")
@@ -203,7 +208,7 @@ currentLabel.pack(fill="x")
 # Define task listbox widget
 taskListFrame = Frame(window,
                       bd = 2,
-                      bg = "DarkSlateBlue")
+                      bg = "Ivory")
 
 taskList = Listbox(taskListFrame,
                    selectmode = "multiple",
@@ -235,8 +240,8 @@ overviewFrame = Frame(window)
 completeLabel = Label(overviewFrame,
                  text="Tasks Completed: ",
                       font = "Tahoma 12 bold",
-                      fg = "seagreen",
-                      bg = "DarkSlateBlue",
+                      fg = "black",
+                      bg = "seagreen",
                       anchor = "w",
                       pady = 5)
 completeLabel.pack(fill = "x")
@@ -245,8 +250,8 @@ completeLabel.pack(fill = "x")
 outstandingLabel = Label(overviewFrame,
                  text="Tasks Outstanding: ",
                       font = "Tahoma 12 bold",
-                      fg = "gold",                        
-                      bg = "DarkSlateBlue",
+                      fg = "black",                        
+                      bg = "gold",
                       anchor = "w",
                       pady = 5)
 outstandingLabel.pack(fill = "x")
@@ -258,31 +263,32 @@ currentFrame.pack(fill = "x", padx = 20)
 taskListFrame.pack(fill = "x", padx = 20)
 overviewFrame.pack(fill = "x", padx = 20, pady = 10)
 
-# Buttons - static placement
-btnGuide = Button(window,
-                  text = "User Guide",
-                  padx = 10,
-                  command = fGuide).place(x = 22, y = 55)
 
+# Buttons - static placement
 btnAdd = Button(window,
                 text = "Add Task" ,
                 padx = 10,
-                command = fAdd).place(x=540, y=145)
+                command = fAdd).place(x = 540, y = 145)
 
 btnDelete = Button(window,
                    text = "Delete Task",
                    padx = 10,
-                   command = fDel).place(x = 25, y = 620)
+                   command = fDel).place(x = 20, y = 620)
 
 btnComplete = Button(window,
                      text = "Set Task Complete/Incomplete",
                      padx = 10,
-                     command = fComplete).place(x = 125, y = 620)
+                     command = fComplete).place(x = 120, y = 620)
 
 btnSave= Button(window,
                 text = "Save Tasks",
                 padx = 10,
-                command = fSave).place(x = 330, y = 620)
+                command = fSave).place(x = 325, y = 620)
+
+btnGuide = Button(window,
+                  text = "User Guide",
+                  padx = 10,
+                  command = fGuide).place(x = 425, y = 620)
 
 btnExit = Button(window,
                  text = "Exit",
