@@ -162,7 +162,17 @@ window.config(bg = "Ivory")
 window.resizable(False, False)
 
 # Define title frame
-titleFrame = Frame(window)
+titleFrame = Frame(window, height=100, bg = "Ivory")
+
+# Add left logo
+logoLeft = PhotoImage(file="./todo_icon.png")
+logoLeftLabel = Label(titleFrame,
+                  image = logoLeft,
+                  bg = "Ivory")
+logoLeftLabel.image = logoLeft
+logoLeftLabel.grid(row = 0, column = 0, padx = (20, 10))
+
+# Add Label
 titleLabel = Label(titleFrame, 
                  text = "To-Do List",
                  fg = "black",
@@ -170,13 +180,16 @@ titleLabel = Label(titleFrame,
                  font = "Garamond 32 bold italic",                  
                  pady = 20,
                  padx = 10)
-titleLabel.pack(fill = "x")
+titleLabel.grid(row=0, column=1, sticky="ew")
 
-# Add image
-#logo = PhotoImage(file="./todo_icon.png")
-#logoLabel = Label(titleFrame,
-#                  image = logo).place(x = 5, y = 5)
-
+# Add right logo
+logoRight = PhotoImage(file="./checkmark_icon.png")
+logoRightLabel = Label(titleFrame,
+                  image = logoRight,
+                  bg = "Ivory")
+logoRightLabel.image = logoRight
+logoRightLabel.grid(row = 0, column = 2, padx = (10, 20))
+                  
 # Define task frame
 taskFrame = Frame(window, 
                 padx = 10,
