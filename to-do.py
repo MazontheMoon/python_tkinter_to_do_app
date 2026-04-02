@@ -37,7 +37,28 @@ def fReadFile():
                                                 taskList.itemconfig(task, background="gold", foreground="black")
         except:
                 messagebox.showerror("File IO Error", "Failed to import tasks")
-                window.destroy()                              
+                window.destroy()
+
+        # Display task counters
+        taskCounter()
+
+# Task Counter
+def taskCounter():
+        complete = 0
+        outstanding = 0
+        count = taskList.index("end")
+
+        # Count complete vs outstanding tasks
+        for task in range(count):
+                bground = taskList.itemcget(task, "background")
+                if bground == "seagreen":
+                        complete += 1
+                else:
+                        outstanding += 1
+        # Display count
+        completeLabel.config(text="Tasks Completed: " + str(complete))
+        outstandingLabel.config(text="Tasks Outstanding: " + str(outstanding))
+        
 
 # Display user guide
 def fGuide():
@@ -60,6 +81,7 @@ def fAdd(event = None):
                 taskList.itemconfig("end", background="gold", foreground="black")
         else:
                 messagebox.showerror("Error", "Enter a Task")
+        taskCounter()
         taskEntry.focus()
 
 # Delete task
@@ -76,6 +98,7 @@ def fDel():
                                 taskList.delete(task)
         else:
                 messagebox.showerror("Error", "No Tasks Selected.")
+        taskCounter()
         taskEntry.focus()
 
 # Complete task
@@ -90,10 +113,11 @@ def fComplete():
                 for task in completeTasks[::-1]:
                         bgColor = taskList.itemcget(task, "background")
                         if bgColor == "gold":
-                                taskList.itemconfig(task, background="green", foreground="black")
+                                taskList.itemconfig(task, background="seagreen", foreground="black")
                         else:
                                 taskList.itemconfig(task, background="gold", foreground="black")
         taskList.selection_clear(0, "end")
+        taskCounter()
         taskEntry.focus()
 
 # Export task
@@ -107,7 +131,7 @@ def fSave():
                 with open("./tasks.csv", "w") as taskFile:
                         for task in range(0, count):
                                 bground = taskList.itemcget(task, "background")
-                                if bground == "green":
+                                if bground == "seagreen":
                                         complete = "c"
                                 else:
                                       complete = "o"
@@ -143,7 +167,7 @@ titleLabel = Label(titleFrame,
                  text = "To-Do List",
                  fg = "black",
                  bg = "DarkSlateBlue",
-                 font = "Garamond 32 bold italic",
+                 font = "Garamond 32 bold italic",                  
                  pady = 20,
                  padx = 10)
 titleLabel.pack(fill = "x")
@@ -209,8 +233,9 @@ overviewFrame = Frame(window)
 
 # Define complete label widget
 completeLabel = Label(overviewFrame,
-                 text="Complete Tasks: ",
+                 text="Tasks Completed: ",
                       font = "Tahoma 12 bold",
+                      fg = "seagreen",
                       bg = "DarkSlateBlue",
                       anchor = "w",
                       pady = 5)
@@ -218,8 +243,9 @@ completeLabel.pack(fill = "x")
 
 # Define outstanding label widget
 outstandingLabel = Label(overviewFrame,
-                 text="Outstanding Tasks: ",
+                 text="Tasks Outstanding: ",
                       font = "Tahoma 12 bold",
+                      fg = "gold",                        
                       bg = "DarkSlateBlue",
                       anchor = "w",
                       pady = 5)
