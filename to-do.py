@@ -28,12 +28,13 @@ def fReadFile():
                         data = list(reader)
 
                         # Populate task list
-                        for task in list(range(0, len(data))):
-                                taskList.insert(task, data[task][0])
-                                if data[task][1] == "c":
-                                        taskList.itemconfig(task, background="green", foreground="black")
-                                else:
-                                        taskList.itemconfig(task, background="gold", foreground="black")
+                        if len(data) > 0:
+                                for task in list(range(0, len(data))):
+                                        taskList.insert(task, data[task][0])
+                                        if data[task][1] == "c":
+                                                taskList.itemconfig(task, background="green", foreground="black")
+                                        else:
+                                                taskList.itemconfig(task, background="gold", foreground="black")
         except:
                 messagebox.showerror("File IO Error", "Failed to import tasks")
                 window.destroy()                              
