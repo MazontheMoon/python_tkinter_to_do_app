@@ -19,6 +19,25 @@ filename = "./tasks.csv"
 # FUNCTIONS
 # ---------
 
+# Import tasks
+def fReadFile():
+        try:
+                # Access csv file
+                with open(filename) as taskFile:
+                        reader = csv.reader(taskFile)
+                        data = list(reader)
+
+                        # Populate task list
+                        for task in list(range(0, len(data))):
+                                taskList.insert(task, data[task][0])
+                                if data[task][1] == "c":
+                                        taskList.itemconfig(task, background="green", foreground="black")
+                                else:
+                                        taskList.itemconfig(task, background="gold", foreground="black")
+        except:
+                messagebox.showerror("File IO Error", "Failed to import tasks")
+                window.destroy()                              
+
 # Display user guide
 def fGuide():
         guideText = """How to use the To Do application.\n
@@ -99,9 +118,10 @@ def fSave():
 
 # Exit application
 def fExit():
-	answer = messagebox.askquestion("Exit Application", "Are you sure you want to exit this application?")
-	if answer == 'yes':
-		window.destroy()
+        answer = messagebox.askquestion("Exit Application", "Are you sure you want to exit this application?")
+        if answer == 'yes':
+                fSave()
+                window.destroy()
 
 # ---
 # GUI
@@ -119,10 +139,10 @@ window.resizable(False, False)
 # Define title frame and label
 titleFrame = Frame(window)
 titleLabel = Label(titleFrame, 
-		 text = "To-Do List",
+                 text = "To-Do List",
                  fg = "black",
                  bg = "DarkSlateBlue",
-		 font = "Garamond 32 bold italic",
+                 font = "Garamond 32 bold italic",
                  pady = 20,
                  padx = 10)
 titleLabel.pack(fill = "x")
@@ -243,4 +263,5 @@ btnExit = Button(window,
                  command = fExit).place(x = 570, y = 620)
 
 # Display application window
+fReadFile()
 window.mainloop()
