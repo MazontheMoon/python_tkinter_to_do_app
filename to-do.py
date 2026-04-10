@@ -1,8 +1,7 @@
 '''
-SD-GAL-05 SD-TA-009 Exercise 001
+SD-GAL-05 SD-TA-009 Assignment Task 2
 Author: Mary Ronan
-Last Modified:
-02/04/2026
+Last Modified: 02/04/2026
 A To Do Application in Python built using Tkinter
 '''
 
@@ -80,7 +79,7 @@ def fAdd(event = None):
         newTask = taskEntry.get()
         taskEntry.delete(0, END)
 
-        # Check for valid task
+        # Check for valid entry
         if newTask != "":
                 taskList.insert(END, newTask)
                 taskList.itemconfig("end", background="gold", foreground="black")
@@ -108,6 +107,7 @@ def fDel():
 
 # Complete task
 def fComplete():
+        
         # Get selected item(s)
         completeTasks = taskList.curselection()
 
@@ -177,7 +177,7 @@ window.resizable(False, False)
 # Define title frame
 titleFrame = Frame(window, height=100, bg = "Ivory")
 
-# Add left logo
+# Add logo (left)
 logoLeft = PhotoImage(file="./todo_icon.png")
 logoLeftLabel = Label(titleFrame,
                   image = logoLeft,
@@ -185,7 +185,7 @@ logoLeftLabel = Label(titleFrame,
 logoLeftLabel.image = logoLeft
 logoLeftLabel.grid(row = 0, column = 0, padx = (20, 10))
 
-# Add Label
+# Add title label
 titleLabel = Label(titleFrame, 
                  text = "To-Do List",
                  fg = "black",
@@ -195,7 +195,7 @@ titleLabel = Label(titleFrame,
                  padx = 10)
 titleLabel.grid(row=0, column=1, sticky="ew")
 
-# Add right logo
+# Add logo (right)
 logoRight = PhotoImage(file="./checkmark_icon.png")
 logoRightLabel = Label(titleFrame,
                   image = logoRight,
@@ -273,7 +273,7 @@ completeLabel = Label(overviewFrame,
                       pady = 5)
 completeLabel.pack(fill = "x")
 
-# Define outstanding label widget on overview frame
+# Define outstanding label widget in overview frame
 outstandingLabel = Label(overviewFrame,
                  text = "Tasks Outstanding: ",
                       font = "Tahoma 12 bold",
@@ -324,3 +324,6 @@ btnExit = Button(window,
 # Display application window
 fReadFile()
 window.mainloop()
+
+
+
